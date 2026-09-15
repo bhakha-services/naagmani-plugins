@@ -1,0 +1,20 @@
+{
+  "name": "my-go-plugin",
+  "version": "0.1.0",
+  "api_version": "v1",
+  "description": "A starter Naagmani plugin built with Go",
+  "author": "developer",
+  "priority": 100,
+  "failure_policy": "fail_close",
+  "timeout_ms": 500,
+  "runtime": {
+    "language": "go",
+    "command": "./my-go-plugin"
+  },
+  "permissions": [
+    "request.read"
+  ],
+  "hooks": [
+    "request.before"
+  ]
+}

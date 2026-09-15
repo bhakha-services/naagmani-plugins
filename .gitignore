@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Build and binary artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.tar.gz
+*.zip
+
+# Logs and environment
+*.log
+.env
+.env.*
+!.env.example
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

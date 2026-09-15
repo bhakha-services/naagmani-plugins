@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","method":"plugin.register","params":{"plugin_name":"hello-plugin-node","plugin_version":"0.1.0","api_version":"v1","protocol_version":"naagmani.plugin/v1","permissions":["request.read"]},"id":1}

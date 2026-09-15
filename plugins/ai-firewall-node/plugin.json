@@ -1,0 +1,24 @@
+{
+  "name": "ai-firewall-node",
+  "version": "1.0.0",
+  "api_version": "v1",
+  "description": "Naagmani AI Firewall reference plugin in Node.js",
+  "author": "Naagmani Security Team",
+  "priority": 10,
+  "failure_policy": "fail_close",
+  "timeout_ms": 1000,
+  "runtime": {
+    "language": "node",
+    "command": "node",
+    "args": ["dist/index.js"]
+  },
+  "permissions": [
+    "request.read"
+  ],
+  "capabilities": [
+    "security.firewall"
+  ],
+  "hooks": [
+    "request.before"
+  ]
+}

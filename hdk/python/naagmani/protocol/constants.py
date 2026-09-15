@@ -1,0 +1,36 @@
+"""
+Canonical protocol identifier for Naagmani Plugin Protocol v1.
+FROZEN PROTOCOL: DO NOT ALTER.
+"""
+PROTOCOL_VERSION = "naagmani.plugin/v1"
+
+# Standard JSON-RPC 2.0 and Naagmani Protocol v1 error codes
+CODE_PARSE_ERROR = -32700
+CODE_INVALID_REQUEST = -32600
+CODE_METHOD_NOT_FOUND = -32601
+CODE_INVALID_PARAMS = -32602
+CODE_INTERNAL_ERROR = -32603
+CODE_REGISTRATION_FAILED = -32000
+CODE_PROTOCOL_VERSION_MISMATCH = -32001
+CODE_PERMISSION_DENIED = -32002
+CODE_EXECUTION_TIMEOUT = -32003
+CODE_EXECUTION_FAILED = -32004
+CODE_MODIFICATION_REJECTED = -32005
+CODE_PLUGIN_UNHEALTHY = -32006
+
+# Protocol v1 Method Names
+METHOD_REGISTER = "plugin.register"
+METHOD_HEALTH = "plugin.health"
+METHOD_SHUTDOWN = "plugin.shutdown"
+METHOD_HOOK_INVOKE = "plugin.hook.invoke"
+
+# Pipeline Hook Names
+HOOK_REQUEST_BEFORE = "request.before"
+HOOK_REQUEST_AFTER = "request.after"
+HOOK_RESPONSE_BEFORE = "response.before"
+HOOK_RESPONSE_AFTER = "response.after"
+
+# Hook Decision actions
+DECISION_CONTINUE = "continue"
+DECISION_MODIFY = "modify"
+DECISION_BLOCK = "block"

@@ -1,0 +1,35 @@
+{
+  "name": "agent-runtime",
+  "version": "1.0.0",
+  "api_version": "v1",
+  "description": "Naagmani Agent Runtime & Tool Orchestration Engine",
+  "author": "Naagmani Core Team",
+  "priority": 25,
+  "failure_policy": "fail_close",
+  "timeout_ms": 30000,
+  "capabilities": [
+    "agent.runtime",
+    "agent.orchestration"
+  ],
+  "runtime": {
+    "language": "node",
+    "command": "node",
+    "args": ["dist/index.js"]
+  },
+  "permissions": [
+    "request.read",
+    "request.modify",
+    "agent.execute",
+    "tools.mcp",
+    "knowledge.rag"
+  ],
+  "hooks": [
+    "request.before"
+  ],
+  "configuration": {
+    "max_steps": 8,
+    "max_tool_calls": 5,
+    "max_execution_time_ms": 30000,
+    "max_context_size": 16000
+  }
+}

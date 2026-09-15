@@ -1,0 +1,26 @@
+{
+  "name": "dlp",
+  "version": "1.0.0",
+  "api_version": "v1",
+  "description": "Naagmani Data Loss Prevention (DLP) & PII Redaction Plugin",
+  "author": "Naagmani Security Team",
+  "priority": 20,
+  "failure_policy": "fail_close",
+  "timeout_ms": 1000,
+  "runtime": {
+    "language": "python",
+    "command": "python",
+    "args": ["main.py"]
+  },
+  "permissions": [
+    "request.read",
+    "request.modify"
+  ],
+  "capabilities": [
+    "security.dlp",
+    "privacy.pii"
+  ],
+  "hooks": [
+    "request.before"
+  ]
+}

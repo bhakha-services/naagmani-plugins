@@ -1,0 +1,31 @@
+{
+  "name": "@naagmani/hdk",
+  "version": "0.1.0",
+  "description": "Naagmani Plugin HDK for Node.js / TypeScript",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/tests/hdk.test.js",
+    "pretest": "tsc"
+  },
+  "keywords": [
+    "naagmani",
+    "plugin",
+    "hdk",
+    "ai",
+    "os",
+    "json-rpc"
+  ],
+  "author": "Naagmani Core Team",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

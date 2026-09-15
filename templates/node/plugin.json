@@ -1,0 +1,21 @@
+{
+  "name": "my-node-plugin",
+  "version": "0.1.0",
+  "api_version": "v1",
+  "description": "A starter Naagmani plugin built with Node.js & TypeScript",
+  "author": "developer",
+  "priority": 100,
+  "failure_policy": "fail_close",
+  "timeout_ms": 500,
+  "runtime": {
+    "language": "node",
+    "command": "node",
+    "args": ["dist/index.js"]
+  },
+  "permissions": [
+    "request.read"
+  ],
+  "hooks": [
+    "request.before"
+  ]
+}

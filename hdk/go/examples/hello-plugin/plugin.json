@@ -1,0 +1,21 @@
+{
+  "name": "hello-plugin",
+  "version": "0.1.0",
+  "api_version": "v1",
+  "description": "A simple Naagmani hello world plugin",
+  "author": "developer",
+  "priority": 100,
+  "failure_policy": "fail_close",
+  "timeout_ms": 500,
+  "runtime": {
+    "language": "go",
+    "command": "./hello-plugin",
+    "args": []
+  },
+  "permissions": [
+    "request.read"
+  ],
+  "hooks": [
+    "request.before"
+  ]
+}

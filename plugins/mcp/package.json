@@ -1,0 +1,17 @@
+{
+  "name": "mcp-node",
+  "version": "1.0.0",
+  "description": "Naagmani Model Context Protocol (MCP) Tool Execution Plugin",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@naagmani/hdk": "file:../../hdk/node"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

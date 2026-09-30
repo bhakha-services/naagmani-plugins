@@ -1,0 +1,33 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gemGrad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34d399" />
+      <stop offset="0.5" stop-color="#10b981" />
+      <stop offset="1" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="orbitGrad" x1="2" y1="16" x2="30" y2="16" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10b981" />
+      <stop offset="1" stop-color="#38bdf8" />
+    </linearGradient>
+  </defs>
+
+  <rect width="32" height="32" rx="7" fill="#07090e" />
+  
+  <polygon
+    points="16,4 26,8.5 26,23.5 16,28 6,23.5 6,8.5"
+    stroke="url(#orbitGrad)"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <polygon
+    points="16,7.5 22.5,11 22.5,21 16,24.5 9.5,21 9.5,11"
+    fill="url(#gemGrad)"
+    fill-opacity="0.25"
+    stroke="url(#gemGrad)"
+    stroke-width="1.2"
+  />
+
+  <circle cx="16" cy="16" r="3" fill="#34d399" />
+</svg>

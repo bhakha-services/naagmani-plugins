@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.svg" alt="Naagmani Logo" width="80" height="80" />
+</p>
+
 # Naagmani Plugin Ecosystem (`naagmani-plugins`)
 
 Welcome to the official repository for the **Naagmani AI Operating System Plugin Ecosystem**, containing official Host Development Kits (HDKs), reference plugins, protocol specifications, and templates.

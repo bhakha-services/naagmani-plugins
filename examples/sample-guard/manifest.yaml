@@ -1,0 +1,15 @@
+name: sample-guard
+version: 1.0.0
+protocol_version: naagmani.plugin/v1
+description: Minimal Reference Naagmani Python Safety Plugin
+author: Bhakha Services / Developer Ecosystem
+publisher: pub_naagmani_official
+entrypoint: main.py
+capabilities:
+  - safety.content_guard
+runtime:
+  language: python
+  command: ./bin/launcher
+  args: []
+hooks:
+  - provider.before

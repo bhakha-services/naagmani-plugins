@@ -1,0 +1,68 @@
+{
+  "name": "naagmani-privacy-shield",
+  "version": "1.0.0",
+  "api_version": "v1",
+  "description": "Official Enterprise Privacy Shield & PII Tokenizer for Naagmani OS",
+  "author": "Bhakha Services / Naagmani Security Team",
+  "runtime": {
+    "language": "python",
+    "version": ">=3.11",
+    "command": "./bin/launcher",
+    "args": []
+  },
+  "permissions": [
+    "request.read",
+    "request.modify",
+    "response.read",
+    "response.modify"
+  ],
+  "hooks": [
+    "provider.before",
+    "provider.after"
+  ],
+  "capabilities": [
+    "privacy.pii"
+  ],
+  "priority": 10,
+  "failure_policy": "fail_close",
+  "timeout_ms": 1500,
+  "config_schema": {
+    "type": "object",
+    "properties": {
+      "confidence_threshold": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "default": 0.60
+      },
+      "default_action": {
+        "type": "string",
+        "enum": ["TOKENIZE", "MASK", "REDACT", "ALLOW", "BLOCK"],
+        "default": "TOKENIZE"
+      },
+      "action_map": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "enum": ["TOKENIZE", "MASK", "REDACT", "ALLOW", "BLOCK"]
+        }
+      },
+      "allow_list": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "block_list": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "inspect_response_pii": {
+        "type": "boolean",
+        "default": false
+      },
+      "strict_streaming_no_downgrade": {
+        "type": "boolean",
+        "default": false
+      }
+    }
+  }
+}

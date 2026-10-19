@@ -1,30 +1,100 @@
-# Dependencies
-node_modules/
+# ==============================================================================
+# Naagmani Plugins Repository - Comprehensive .gitignore
+# ==============================================================================
 
-# Python caches
+# --- Dependencies & Vendoring Caches ---
+node_modules/
+.vendor_cache/
+vendor_cache/
+site-packages/
+
+# --- Python Bytecode & Runtime Caches ---
 __pycache__/
 *.py[cod]
 *$py.class
-*.egg-info/
+*.pyo
+*.pyd
+
+# --- Distribution, Builds & Packaging Artifacts ---
 dist/
 build/
+sdist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+*.whl
+develop-eggs/
+downloads/
+parts/
+var/
+runtimes/
 
-# Build and binary artifacts
+# --- Binary & Compressed Archives ---
 *.exe
 *.dll
 *.so
 *.dylib
 *.tar.gz
+*.tgz
 *.zip
+*.7z
+*.rar
 
-# Logs and environment
+# --- Test, Coverage & Linter Caches ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+htmlcov/
+*.cover
+
+# --- Virtual Environments ---
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# --- Environment, Secrets & Cryptographic Keys ---
 *.log
 .env
 .env.*
 !.env.example
+*.key
+*.pem
+*.cert
+*.crt
+*.p12
+*.pfx
+.keys/
+secret/
+secrets/
 
-# IDE & OS
+# --- Temporary & Scratch Files ---
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+tmp/
+scratch/
+
+# --- IDE & Operating System Artifacts ---
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+ehthumbs.db
+desktop.ini

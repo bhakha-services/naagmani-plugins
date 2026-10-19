@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 from ..protocol.constants import DECISION_CONTINUE, DECISION_MODIFY, DECISION_BLOCK
 from .request import Request
 from .response import Response
@@ -13,11 +13,13 @@ class Result:
         block_reason: Optional[str] = None,
         modified_request: Optional[Request] = None,
         modified_response: Optional[Response] = None,
+        token_mappings: Optional[List[Dict[str, str]]] = None,
     ):
         self.action = action
         self.block_reason = block_reason
         self.modified_request = modified_request
         self.modified_response = modified_response
+        self.token_mappings = token_mappings
 
     @classmethod
     def continue_(cls) -> "Result":
@@ -28,8 +30,16 @@ class Result:
         return cls(action=DECISION_BLOCK, block_reason=reason)
 
     @classmethod
-    def modify_request(cls, req: Request) -> "Result":
-        return cls(action=DECISION_MODIFY, modified_request=req)
+    def modify_request(
+        cls,
+        req: Request,
+        token_mappings: Optional[List[Dict[str, str]]] = None,
+    ) -> "Result":
+        return cls(
+            action=DECISION_MODIFY,
+            modified_request=req,
+            token_mappings=token_mappings,
+        )
 
     @classmethod
     def modify_response(cls, resp: Response) -> "Result":
@@ -43,4 +53,6 @@ class Result:
             d["modified_request"] = self.modified_request.to_dict()
         if self.modified_response is not None:
             d["modified_response"] = self.modified_response.to_dict()
+        if self.token_mappings is not None:
+            d["token_mappings"] = self.token_mappings
         return d

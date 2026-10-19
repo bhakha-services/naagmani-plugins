@@ -5,6 +5,8 @@ from ..protocol.constants import (
     HOOK_REQUEST_BEFORE,
     HOOK_RESPONSE_AFTER,
     HOOK_RESPONSE_BEFORE,
+    HOOK_PROVIDER_BEFORE,
+    HOOK_PROVIDER_AFTER,
 )
 from .context import Context
 from .request import Request
@@ -83,6 +85,12 @@ class Plugin:
 
     def on_response_after(self, handler: HandlerFunc) -> "Plugin":
         return self.on(HOOK_RESPONSE_AFTER, handler)
+
+    def on_provider_before(self, handler: HandlerFunc) -> "Plugin":
+        return self.on(HOOK_PROVIDER_BEFORE, handler)
+
+    def on_provider_after(self, handler: HandlerFunc) -> "Plugin":
+        return self.on(HOOK_PROVIDER_AFTER, handler)
 
     def get_handler(self, hook: str) -> Optional[HandlerFunc]:
         return self._handlers.get(hook)

@@ -1,0 +1,3 @@
+# Naagmani Sample Guard Plugin Requirements
+# Pydantic is used for structured validation
+pydantic==2.14.1

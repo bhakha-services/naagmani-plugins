@@ -29,6 +29,8 @@ HOOK_REQUEST_BEFORE = "request.before"
 HOOK_REQUEST_AFTER = "request.after"
 HOOK_RESPONSE_BEFORE = "response.before"
 HOOK_RESPONSE_AFTER = "response.after"
+HOOK_PROVIDER_BEFORE = "provider.before"
+HOOK_PROVIDER_AFTER = "provider.after"
 
 # Hook Decision actions
 DECISION_CONTINUE = "continue"

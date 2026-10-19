@@ -15,6 +15,8 @@ from ..protocol.constants import (
     HOOK_REQUEST_BEFORE,
     HOOK_RESPONSE_AFTER,
     HOOK_RESPONSE_BEFORE,
+    HOOK_PROVIDER_BEFORE,
+    HOOK_PROVIDER_AFTER,
     METHOD_HEALTH,
     METHOD_HOOK_INVOKE,
     METHOD_REGISTER,
@@ -164,6 +166,20 @@ class Server:
                     dec = self._to_decision(res)
                     dec.pop("modified_response", None)  # audit only
                     return dec
+
+            elif hook_name == HOOK_PROVIDER_BEFORE:
+                handler = self.plugin.get_handler(HOOK_PROVIDER_BEFORE)
+                if handler:
+                    req = Request(raw_ctx.get("request"))
+                    res = handler(ctx, req)
+                    return self._to_decision(res)
+
+            elif hook_name == HOOK_PROVIDER_AFTER:
+                handler = self.plugin.get_handler(HOOK_PROVIDER_AFTER)
+                if handler:
+                    resp = Response(raw_ctx.get("response"))
+                    res = handler(ctx, resp)
+                    return self._to_decision(res)
 
         except Exception as e:
             self.log(f"error executing hook {hook_name}: {e}")

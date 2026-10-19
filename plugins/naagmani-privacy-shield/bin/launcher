@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+# Resolve directory where this plugin is installed
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+# Strict hermetic execution: bundled isolated CPython runtime ONLY.
+# Host PATH is never searched; host Python is never used as fallback.
+if [ -x "$SCRIPT_DIR/runtime/bin/python3" ]; then
+    PY_BIN="$SCRIPT_DIR/runtime/bin/python3"
+elif [ -x "$SCRIPT_DIR/runtime/bin/python" ]; then
+    PY_BIN="$SCRIPT_DIR/runtime/bin/python"
+else
+    echo "Fatal: Bundled Python runtime missing or not executable at $SCRIPT_DIR/runtime/bin/python3" >&2
+    exit 1
+fi
+
+# Hermetic isolation: Strip host user site-packages, ambient paths, and bytecode
+export PYTHONHOME="$SCRIPT_DIR/runtime"
+export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/vendor:$SCRIPT_DIR/site-packages"
+export PYTHONNOUSERSITE=1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONUNBUFFERED=1
+export TLDEXTRACT_PUBLIC_SUFFIX_LIST_URLS=""
+export LD_LIBRARY_PATH="$SCRIPT_DIR/runtime/lib:${LD_LIBRARY_PATH:-}"
+
+# Execute in isolated mode (-s disables user site-packages)
+exec "$PY_BIN" -s "$SCRIPT_DIR/main.py" "$@"

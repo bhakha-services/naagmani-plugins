@@ -12,6 +12,7 @@ class Context:
         self._project_id: Optional[str] = tenant.get("project_id")
         self._environment_id: Optional[str] = tenant.get("environment_id")
         self._metadata: Dict[str, str] = dict(raw_context.get("metadata") or {})
+        self._config: Dict[str, Any] = dict(raw_context.get("config") or {})
 
     @property
     def hook(self) -> str:
@@ -40,6 +41,10 @@ class Context:
     @property
     def metadata(self) -> Dict[str, str]:
         return dict(self._metadata)
+
+    @property
+    def config(self) -> Dict[str, Any]:
+        return dict(self._config)
 
     def __setattr__(self, key: str, value: Any) -> None:
         if hasattr(self, key):

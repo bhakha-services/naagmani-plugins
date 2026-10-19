@@ -1,0 +1,79 @@
+name: Python Plugin Packaging & Offline Certification
+
+on:
+  push:
+    branches: [main, release/*]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-package:
+    name: Build, Sign & Certify (Linux x86_64)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build & test dependencies
+        run: |
+          python3 -m pip install --upgrade pip pytest
+
+      - name: Run Plugin Unit Tests
+        run: |
+          pytest plugins/naagmani-privacy-shield/tests -v
+
+      - name: Package Plugin using Hermetic Toolchain
+        run: |
+          python3 tools/packager/pack_plugin.py \
+            --plugin-dir plugins/naagmani-privacy-shield \
+            --output-dir plugins/naagmani-privacy-shield/dist \
+            --target-os linux \
+            --target-arch amd64 \
+            --python-version 3.11
+
+      - name: Verify Deterministic Reproducibility
+        run: |
+          # Package second time to temporary directory
+          TEMP_DIST=$(mktemp -d)
+          python3 tools/packager/pack_plugin.py \
+            --plugin-dir plugins/naagmani-privacy-shield \
+            --output-dir "${TEMP_DIST}" \
+            --target-os linux \
+            --target-arch amd64 \
+            --python-version 3.11
+          
+          ORIG_DIGEST=$(sha256sum plugins/naagmani-privacy-shield/dist/*.tar.gz | awk '{print $1}')
+          REPRO_DIGEST=$(sha256sum "${TEMP_DIST}"/*.tar.gz | awk '{print $1}')
+          rm -rf "${TEMP_DIST}"
+
+          if [ "${ORIG_DIGEST}" != "${REPRO_DIGEST}" ]; then
+            echo "Reproducibility failure: digests differ!"
+            echo "Original:     ${ORIG_DIGEST}"
+            echo "Reproduced:   ${REPRO_DIGEST}"
+            exit 1
+          fi
+          echo "Reproducibility confirmed: ${ORIG_DIGEST}"
+
+      - name: Run Clean Linux Offline Certification
+        run: |
+          # Test inside an unprivileged Docker container with ZERO network access
+          docker run --rm --network none \
+            -v "$(pwd)/scripts/clean_linux_cert.py:/cert/clean_linux_cert.py:ro" \
+            -v "$(pwd)/plugins/naagmani-privacy-shield/dist:/dist:ro" \
+            python:3.11-slim \
+            python3 /cert/clean_linux_cert.py /dist/naagmani-privacy-shield-1.0.0.tar.gz /tmp/cert_work
+
+      - name: Archive Signed Release Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: naagmani-privacy-shield-linux-amd64
+          path: |
+            plugins/naagmani-privacy-shield/dist/*.tar.gz
+            plugins/naagmani-privacy-shield/dist/artifact_manifest.json
+          retention-days: 14
